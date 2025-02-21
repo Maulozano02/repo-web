@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css"; // Importamos estilos globales
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // Credenciales válidas (hardcodeadas)
   const validUsername = "admin";
@@ -13,6 +15,7 @@ function Login({ onLogin }) {
     e.preventDefault();
     if (username === validUsername && password === validPassword) {
       onLogin(username);
+      navigate("/dashboard"); // Redirigir al área protegida
     } else {
       alert("Usuario o contraseña incorrectos");
     }
