@@ -12,7 +12,11 @@ function Navbar({ user, onLogout }) {
           <button onClick={onLogout}>Cerrar sesión</button>
         </>
       ) : (
-        <Link to="/login">Login</Link>
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Registrarse</Link> {/* ✅ Ahora se ve en el Navbar */}
+          <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link> {/* ✅ Ahora se ve en el Navbar */}
+        </>
       )}
     </nav>
   );
