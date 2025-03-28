@@ -11,15 +11,23 @@ function Login({ onLogin }) {
   const validUsername = "admin";
   const validPassword = "123456";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username === validUsername && password === validPassword) {
+    const res = await fetch("http://localhost:5055/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: username, password }),
+    });
+  
+    const data = await res.json();
+    if (res.ok) {
       onLogin(username);
-      navigate("/"); // ✅ Redirigir al Home después del login
+      navigate("/");
     } else {
-      alert("Usuario o contraseña incorrectos");
+      alert(data.error);
     }
   };
+  
 
   return (
     <div className="login-box">
@@ -27,7 +35,7 @@ function Login({ onLogin }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Usuario"
+          placeholder="Correo"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />

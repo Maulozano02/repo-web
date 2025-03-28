@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import PlayersPage from "./pages/PlayersPage";
 import "./App.css";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -34,6 +35,7 @@ function AppContent({ user, setUser }) {
           <Route path="/login" element={<Login onLogin={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard user={user} />} />
           <Route path="/players" element={<PlayersPage />} />
           {user && <Route path="/welcome" element={<Welcome username={user} onLogout={() => setUser(null)} />} />}

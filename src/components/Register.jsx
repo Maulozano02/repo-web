@@ -9,17 +9,30 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
-
-    alert(`Usuario registrado: ${username}`);
-    navigate("/login"); 
+  
+    const res = await fetch("http://localhost:5055/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+  
+    const data = await res.json();
+  
+    if (res.ok) {
+      alert("Usuario registrado correctamente");
+      navigate("/login");
+    } else {
+      alert(data.error || "Error al registrarse");
+    }
   };
+  
 
   return (
     <div className="login-box">

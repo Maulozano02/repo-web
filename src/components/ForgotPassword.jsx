@@ -4,11 +4,24 @@ import "../App.css";
 function ForgotPassword() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    alert(`Se ha enviado un enlace de recuperación a: ${email}`);
+  
+    const res = await fetch("http://localhost:5055/api/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+  
+    const data = await res.json();
+  
+    if (res.ok) {
+      alert("Correo de recuperación enviado");
+    } else {
+      alert(data.error || "Error al enviar el correo");
+    }
   };
+  
 
   return (
     <div className="login-box">
