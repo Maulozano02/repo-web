@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# 📌 Instalación y Configuración del Proyecto React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este documento explica cómo instalar y ejecutar este proyecto desde cero en tu computadora.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **1️⃣ Requisitos Previos**
 
-### `npm start`
+Antes de comenzar, asegúrate de tener instalado:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🔹 **Node.js y npm**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React requiere Node.js para funcionar. Descárgalo desde:  
+➡️ [https://nodejs.org/](https://nodejs.org/)
 
-### `npm test`
+Luego, verifica la instalación ejecutando en la terminal:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+node -v   # Debería mostrar la versión de Node.js
+npm -v    # Debería mostrar la versión de npm
+Si ambos comandos muestran una versión, entonces ya está instalado correctamente.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2️⃣ Clonar el Repositorio
+Abre la terminal y ejecuta:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+git clone https://github.com/Maulozano02/repo-web.git
+cd repo-web
+3️⃣ Instalar Dependencias
+Ejecuta el siguiente comando dentro del proyecto:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
+Esto instalará todas las dependencias necesarias.
 
-### `npm run eject`
+Si aparece el error:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+vbnet
+ERROR in ./src/reportWebVitals.js 5:4-24
+Module not found: Error: Can't resolve 'web-vitals'
+Instala el paquete que falta con:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install web-vitals
+4️⃣ Ejecutar el Proyecto
+Para correr la aplicación en modo desarrollo, usa:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm start
+Luego, abre tu navegador y visita:
+➡️ http://localhost:3000/
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5️⃣ Configuración y Ejecución del Backend
+A continuación se describen los pasos para levantar el backend, necesario para funciones de registro, login y recuperación de contraseña.
 
-## Learn More
+🔹 Requisitos para el Backend
+Node.js (ya lo instalaste en pasos previos)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+MongoDB instalado y corriendo localmente
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Si no tienes MongoDB, puedes instalarlo en Mac usando Homebrew:
 
-### Code Splitting
+brew tap mongodb/brew
+brew install mongodb-community@7.0
+brew services start mongodb-community@7.0
+mongosh
+Si ves el prompt test> al correr mongosh, MongoDB está funcionando.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+🔹 Instalar dependencias del backend
+En una terminal nueva, navega a la carpeta backend:
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+cd backend
+npm install
+🔹 Configurar variables de entorno
+Crea un archivo .env dentro de la carpeta backend con el siguiente contenido (ajusta los valores según tu entorno):
 
-### Making a Progressive Web App
+env
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+PORT=5055
+MONGO_URI=mongodb://localhost:27017/auth-demo
+JWT_SECRET=miclaveultrasecreta
+EMAIL_USER=tu_correo@gmail.com
+EMAIL_PASS=tu_contraseña_de_app
+⚠️ IMPORTANTE:
+Usa una contraseña de aplicación de Gmail, no tu contraseña real.
 
-### Advanced Configuration
+🔹 Levantar el servidor backend
+Desde la carpeta backend, ejecuta:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+node index.js
+Si ves en la terminal:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+nginx
 
-### `npm run build` fails to minify
+Backend escuchando en http://localhost:5055
+entonces el backend está funcionando correctamente.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+6️⃣ Seguridad
+Asegúrate de que tu archivo .env NO se suba a GitHub. El archivo .gitignore en la raíz de tu proyecto debe incluir:
+
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+Si ya agregaste .env por error, elimínalo del staging con:
+
+
+git rm --cached backend/.env
+Con estos pasos, tendrás tanto el frontend como el backend funcionando en tu entorno local.
+
