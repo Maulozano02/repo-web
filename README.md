@@ -8,7 +8,7 @@ Este documento explica cómo instalar y ejecutar este proyecto desde cero en tu 
 
 Antes de comenzar, asegúrate de tener instalado:
 
-### 🔹 **Node.js y npm**
+### **🔹 Node.js y npm**
 
 React requiere Node.js para funcionar. Descárgalo desde:  
 ➡️ [https://nodejs.org/](https://nodejs.org/)
@@ -20,12 +20,13 @@ node -v   # Debería mostrar la versión de Node.js
 npm -v    # Debería mostrar la versión de npm
 Si ambos comandos muestran una versión, entonces ya está instalado correctamente.
 
-2️⃣ Clonar el Repositorio
+## **2️⃣ Clonar el Repositorio**
 Abre la terminal y ejecuta:
 
 git clone https://github.com/Maulozano02/repo-web.git
 cd repo-web
-3️⃣ Instalar Dependencias
+
+## **3️⃣ Instalar Dependencias**
 Ejecuta el siguiente comando dentro del proyecto:
 
 npm install
@@ -33,23 +34,22 @@ Esto instalará todas las dependencias necesarias.
 
 Si aparece el error:
 
-vbnet
 ERROR in ./src/reportWebVitals.js 5:4-24
 Module not found: Error: Can't resolve 'web-vitals'
 Instala el paquete que falta con:
 
 npm install web-vitals
-4️⃣ Ejecutar el Proyecto
+## **4️⃣ Ejecutar el Proyecto**
 Para correr la aplicación en modo desarrollo, usa:
 
 npm start
 Luego, abre tu navegador y visita:
 ➡️ http://localhost:3000/
 
-5️⃣ Configuración y Ejecución del Backend
+## **5️⃣ Configuración y Ejecución del Backend**
 A continuación se describen los pasos para levantar el backend, necesario para funciones de registro, login y recuperación de contraseña.
 
-🔹 Requisitos para el Backend
+## **🔹 Requisitos para el Backend**
 Node.js (ya lo instalaste en pasos previos)
 
 MongoDB instalado y corriendo localmente
@@ -62,13 +62,14 @@ brew services start mongodb-community@7.0
 mongosh
 Si ves el prompt test> al correr mongosh, MongoDB está funcionando.
 
-🔹 Instalar dependencias del backend
+## **🔹 Instalar dependencias del backend**
 En una terminal nueva, navega a la carpeta backend:
 
 
 cd backend
 npm install
-🔹 Configurar variables de entorno
+
+## **🔹 Configurar variables de entorno**
 Crea un archivo .env dentro de la carpeta backend con el siguiente contenido (ajusta los valores según tu entorno):
 
 env
@@ -78,22 +79,22 @@ MONGO_URI=mongodb://localhost:27017/auth-demo
 JWT_SECRET=miclaveultrasecreta
 EMAIL_USER=tu_correo@gmail.com
 EMAIL_PASS=tu_contraseña_de_app
-⚠️ IMPORTANTE:
+
+## **⚠️ IMPORTANTE:**
 Usa una contraseña de aplicación de Gmail, no tu contraseña real.
 
-🔹 Levantar el servidor backend
+## **🔹 Levantar el servidor backend**
 Desde la carpeta backend, ejecuta:
 
 
 node index.js
 Si ves en la terminal:
 
-nginx
+🚀 Backend escuchando en http://localhost:5055
+✅ Conectado a MongoDB
+Entonces el backend está funcionando correctamente.
 
-Backend escuchando en http://localhost:5055
-entonces el backend está funcionando correctamente.
-
-6️⃣ Seguridad
+## **6️⃣ Seguridad**
 Asegúrate de que tu archivo .env NO se suba a GitHub. El archivo .gitignore en la raíz de tu proyecto debe incluir:
 
 node_modules/
